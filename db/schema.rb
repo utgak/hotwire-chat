@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2023_10_14_105503) do
   create_table "messages", force: :cascade do |t|
     t.string "body", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "room_id", null: false
     t.datetime "created_at"
     t.index ["created_at"], name: "index_messages_on_created_at"

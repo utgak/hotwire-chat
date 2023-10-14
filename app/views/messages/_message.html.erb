@@ -1,7 +1,7 @@
 <div class="<%= message_location(message, user) %>">
   <div class="msg-bubble">
     <div class="msg-info">
-      <div class="msg-info-name"><%= message&.user.nickname %></div>
+      <div class="msg-info-name"><%= message&.user&.nickname %></div>
       <div class="msg-info-time"><%= l(message&.created_at, format: :short) %></div>
     </div>
 

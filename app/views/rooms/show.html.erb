@@ -8,6 +8,7 @@
         <span><i class="fas fa-cog"></i></span>
       </div>
     </header>
+    <%=  %>
 
     <main class="msger-chat">
       <%= turbo_stream_from @room %>
@@ -15,11 +16,13 @@
         <%= render partial: "messages/message", collection: @messages, locals: { user: current_user } %>
       <% end %>
     </main>
-    
-    <%= form_with model: @new_message, class: "msger-inputarea" do |f|%>
-      <%= f.text_field :body, autofocus: true, placeholder: "Enter your message", class: "msger-input" %>
-      <%= f.hidden_field :room_id, value: @room.id %>
-      <%= f.submit "Send", class: "msger-send-btn"%>
+
+    <% if user_signed_in? %>
+      <%= form_with model: @new_message, class: "msger-inputarea" do |f|%>
+        <%= f.text_field :body, autofocus: true, placeholder: "Enter your message", class: "msger-input" %>
+        <%= f.hidden_field :room_id, value: @room.id %>
+        <%= f.submit "Send", class: "msger-send-btn"%>
+      <% end %>
     <% end %>
   </section>
 </div>

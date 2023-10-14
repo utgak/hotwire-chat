@@ -1,0 +1,25 @@
+<div class="page_limiter">
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title">
+        <i class="fas fa-comment-alt"></i> <%= @room.title %>
+      </div>
+      <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div>
+    </header>
+
+    <main class="msger-chat">
+      <%= turbo_stream_from @room %>
+      <%= turbo_frame_tag :messages do %>
+        <%= render partial: "messages/message", collection: @messages, locals: { user: current_user } %>
+      <% end %>
+    </main>
+    
+    <%= form_with model: @new_message, class: "msger-inputarea" do |f|%>
+      <%= f.text_field :body, autofocus: true, placeholder: "Enter your message", class: "msger-input" %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.submit "Send", class: "msger-send-btn"%>
+    <% end %>
+  </section>
+</div>
